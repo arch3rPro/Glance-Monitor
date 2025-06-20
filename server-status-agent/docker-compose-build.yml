@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  agent-build:
+    build: .
+    container_name: glance-agent
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    # 挂载宿主机 /etc/hostname 到 /host/etc/hostname，读取宿主机主机名
+    volumes:
+      - /etc/hostname:/host/etc/hostname:ro
+    environment:
+      - TZ=Asia/Shanghai
